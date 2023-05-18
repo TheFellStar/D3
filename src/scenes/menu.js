@@ -3,7 +3,6 @@ class Menu extends Phaser.Scene {
         super('menu');
     }
     create() {
-        this.cameras.main.setBackgroundColor("#ffffff");
         this.add.text(700, 240, " Sketch \nand Roll", {color: "#000000"}).setFontSize(100);
         let start = this.add.text(800, 450, "Start Game", {color: "#000000"}).setFontSize(50);
         start.setInteractive();
@@ -20,7 +19,6 @@ class LevelSelect extends Phaser.Scene {
         super('levelSelect');
     }
     create(){
-        this.cameras.main.setBackgroundColor("#ffffff");
         this.add.text(600, 340, "Level Select", {color: "#000000"}).setFontSize(100);
         let level1 = this.add.text(830, 450, "Level 1", {color: "#000000"}).setFontSize(50);
         level1.setInteractive();

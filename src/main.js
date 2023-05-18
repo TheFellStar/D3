@@ -16,7 +16,8 @@ let config = {
             debugBodyColor: 0xffffff
         }
     },
-    scene: [ Menu, LevelSelect, Level1, Level2, Level3, ],
+    backgroundColor: '#ffffff',
+    scene: [ Menu, LevelSelect, PauseMenu1, PauseMenu2, PauseMenu3, Level1, Level2, Level3, ],
 }
 
 let game = new Phaser.Game(config);
