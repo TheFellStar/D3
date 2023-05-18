@@ -8,7 +8,7 @@ let config = {
             debug: true
         }
     },
-    scene: [ Menu, BodyBumps, HoneySpider, Collider ],
+    scene: [ Menu ],
 }
 
 let game = new Phaser.Game(config);
