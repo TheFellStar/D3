@@ -9,7 +9,11 @@ let config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: true
+            gravity: {
+                y: 0.8
+            },
+            debug: true,
+            debugBodyColor: 0xffffff
         }
     },
     scene: [ Menu, LevelSelect, Level1, Level2, Level3, ],
