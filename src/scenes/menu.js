@@ -29,5 +29,9 @@ class LevelSelect extends Phaser.Scene {
         let level2 = this.add.text(830, 515, "Level 2", {color: "#000000"}).setFontSize(50);
         level2.setInteractive();
         level2.on('pointerdown', () => this.scene.start('level2'));
+
+        let level3 = this.add.text(830, 580, "Level 3", {color: "#000000"}).setFontSize(50);
+        level3.setInteractive();
+        level3.on('pointerdown', () => this.scene.start('level3'));
     }
 }
