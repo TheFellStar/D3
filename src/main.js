@@ -10,14 +10,14 @@ let config = {
         default: "arcade",
         arcade: {
             gravity: {
-                y: 0.8
+                y: 500
             },
             debug: true,
             debugBodyColor: 0xffffff
         }
     },
     backgroundColor: '#ffffff',
-    scene: [ Menu, LevelSelect, PauseMenu1, PauseMenu2, PauseMenu3, Level1, Level2, Level3, ],
+    scene: [ Menu, LevelSelect, PauseMenu1, PauseMenu2, PauseMenu3, Level1, Level2, Level3, Fail1],
 }
 
 let game = new Phaser.Game(config);
