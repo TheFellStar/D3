@@ -12,7 +12,7 @@ let config = {
             gravity: {
                 y: 500
             },
-            debug: true,
+            debug: false,
             debugBodyColor: 0xffffff
         }
     },

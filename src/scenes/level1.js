@@ -2,8 +2,12 @@ class Level1 extends Phaser.Scene {
     constructor() {
         super('level1');
     }
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('flag', 'flag.png');
+    }
     create(){
-        let ground=this.physics.add.sprite(200,150,"block");
+        let ground = this.physics.add.sprite(300,150,"block");
         ground.displayWidth=100;
         ground.body.immovable = true;
         ground.body.allowGravity = false;
@@ -21,11 +25,17 @@ class Level1 extends Phaser.Scene {
             ground.destroy();
         })
 
-        this.ball = this.add.circle(200, 50, 50, 0x000000);
+        this.ball = this.add.circle(300, 50, 50, 0x000000);
         this.physics.add.existing(this.ball);
 
         this.physics.add.collider(this.ball, ground);
         this.ball.body.setBounce(0.7);
+
+        let line1 = this.add.line(180, 450, 150, 0, 350, 0, 0x000000, 1);
+        this.physics.add.existing(line1);
+        line1.body.immovable = true;
+        line1.body.allowGravity = false;
+        this.physics.add.collider(this.ball, line1);
     }
     update(){
         if(this.ball.body.checkWorldBounds()){
