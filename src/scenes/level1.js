@@ -31,7 +31,7 @@ class Level1 extends Phaser.Scene {
         this.physics.add.collider(this.ball, ground);
         this.ball.body.setBounce(0.7);
 
-        let line1 = this.add.line(180, 450, 150, 0, 350, 0, 0x000000, 1);
+        let line1 = this.add.line(380, 450, 0, 0, 350, 0, 0x000000, 1);
         this.physics.add.existing(line1);
         line1.body.immovable = true;
         line1.body.allowGravity = false;
