@@ -7,10 +7,48 @@ class Level1 extends Phaser.Scene {
         this.load.image('flag', 'flag.png');
     }
     create(){
-        let ground = this.physics.add.sprite(300,150,"block");
-        ground.displayWidth=100;
-        ground.body.immovable = true;
-        ground.body.allowGravity = false;
+        this.P1_VEL = 300;
+
+
+        this.walls = this.physics.add.group({
+			immovable: true
+		});
+
+        this.boxes = this.physics.add.group();
+		
+		this.wallTop = this.walls.create(0, 0, 'square').setOrigin(0);
+		this.wallTop.scaleY = 4;	// make it taaaaaaaall
+		this.wallTop.scaleX = 500;
+		this.wallTop.tint = 0x333333;
+
+		this.wallBtm = this.walls.create(0, 980, 'square').setOrigin(0);
+		this.wallBtm.scaleY = 4;
+		this.wallBtm.scaleX = 500;
+		this.wallBtm.tint = 0x333333;
+
+        this.wallLeft = this.walls.create(0, 0, 'square').setOrigin(0);
+		this.wallLeft.scaleY = 500;
+		this.wallLeft.scaleX = 4;
+
+        this.wallRight = this.walls.create(1795, 0, 'square').setOrigin(0);
+		this.wallRight.scaleY = 500;
+		this.wallRight.scaleX = 4;
+
+        this.box1 = this.boxes.create(centerX, 200, 'square').setOrigin(0);
+        this.box1.scaleY = 4;
+        this.box1.scaleX = 4;
+
+        this.box2 = this.boxes.create(centerX, 400, 'square').setOrigin(0);
+        this.box2.scaleY = 4;
+        this.box2.scaleX = 4;
+
+        this.box3 = this.boxes.create(centerX, 600, 'square').setOrigin(0);
+        this.box3.scaleY = 4;
+        this.box3.scaleX = 4;
+
+        this.box4 = this.boxes.create(centerX, 800, 'square').setOrigin(0);
+        this.box4.scaleY = 4;
+        this.box4.scaleX = 4;
 
         let pause1 = this.add.text(1800, 50, "___\n___\n___\n", {color: "#000000"})
         pause1.setInteractive();
@@ -19,60 +57,41 @@ class Level1 extends Phaser.Scene {
             this.scene.pause();
         })
 
-        let start1 = this.add.text(1700, 800, "Start!", {color: "#000000"}).setFontSize(50);
-        start1.setInteractive();
-        start1.on('pointerdown', () => {
-            ground.destroy();
-        })
+        this.flag = this.add.image(1500, 500, 'flag');
+        this.flag.setScale(0.1);
+        this.physics.add.existing(this.flag);
 
-        this.ball = this.add.circle(300, 50, 50, 0x000000);
+        this.ball = this.add.circle(300, 500, 50, 0x000000);
         this.physics.add.existing(this.ball);
 
-        this.physics.add.collider(this.ball, ground);
-        this.ball.body.setBounce(0.7);
-
-        let line1 = this.add.line(380, 450, 0, 0, 350, 0, 0x000000, 1);
-        this.physics.add.existing(line1);
-        line1.body.immovable = true;
-        line1.body.allowGravity = false;
-        this.physics.add.collider(this.ball, line1);
+        cursors = this.input.keyboard.createCursorKeys();
     }
     update(){
-        if(this.ball.body.checkWorldBounds()){
-            console.log("hello");
-            this.scene.launch('fail1');
-            this.scene.pause('level1');
+        this.physics.add.collider(this.ball, this.walls);
+        this.physics.add.collider(this.ball, this.boxes);
+        this.physics.add.collider(this.boxes, this.walls);
+        this.physics.add.collider(this.boxes, this.boxes);
+
+        if(cursors.up.isDown){
+            this.ball.body.setVelocityY(-this.P1_VEL);
+			this.ball.body.setVelocityX(0);
+        }else if(cursors.down.isDown){
+            this.ball.body.setVelocityY(this.P1_VEL);
+			this.ball.body.setVelocityX(0);
+        }else if(cursors.left.isDown) {
+			this.ball.body.setVelocityX(-this.P1_VEL);
+			this.ball.body.setVelocityY(0);
+		} else if(cursors.right.isDown) {
+			this.ball.body.setVelocityX(this.P1_VEL);
+			this.ball.body.setVelocityY(0);
+		} else {
+			this.ball.body.setVelocityX(0);
+			this.ball.body.setVelocityY(0);
         }
-    }
-}
 
-class Fail1 extends Phaser.Scene {
-    constructor(){
-        super('fail1');
-    }
-    create(){
-        this.add.text(750, 340, "Failed", {color: "#000000"}).setFontSize(100);
-        let resume1 = this.add.text(840, 440, "Restart", {color: "#000000"}).setFontSize(50);
-        resume1.setInteractive();
-        resume1.on('pointerdown', () => {
-            this.scene.stop();
-            this.scene.stop('level1');
-            this.scene.start('level1');
-        })
-
-        let select1 = this.add.text(760, 500, "Level Select", {color: "#000000"}).setFontSize(50);
-        select1.setInteractive();
-        select1.on('pointerdown', () => {
-            this.scene.stop('level1');
-            this.scene.start('levelSelect');
-        })
-
-        let m1 = this.add.text(870, 560, "Menu", {color: "#000000"}).setFontSize(50);
-        m1.setInteractive();
-        m1.on('pointerdown', () => {
-            this.scene.stop('level1');
-            this.scene.start('menu');
-        })
+        if(this.physics.overlap(this.ball, this.flag)){
+            this.scene.start('level2');
+        }
     }
 }
 
@@ -81,22 +100,22 @@ class PauseMenu1 extends Phaser.Scene {
         super('pauseMenu1');
     }
     create(){
-        this.add.text(620, 340, "Game Paused", {color: "#000000"}).setFontSize(100);
-        let resume1 = this.add.text(840, 440, "Resume", {color: "#000000"}).setFontSize(50);
+        this.add.text(620, 340, "Game Paused", {color: "#ff0000"}).setFontSize(100);
+        let resume1 = this.add.text(840, 440, "Resume", {color: "#ff0000"}).setFontSize(50);
         resume1.setInteractive();
         resume1.on('pointerdown', () => {
             this.scene.resume('level1');
             this.scene.stop();
         })
 
-        let select1 = this.add.text(760, 500, "Level Select", {color: "#000000"}).setFontSize(50);
+        let select1 = this.add.text(760, 500, "Level Select", {color: "#ff0000"}).setFontSize(50);
         select1.setInteractive();
         select1.on('pointerdown', () => {
             this.scene.stop('level1');
             this.scene.start('levelSelect');
         })
 
-        let m1 = this.add.text(870, 560, "Menu", {color: "#000000"}).setFontSize(50);
+        let m1 = this.add.text(870, 560, "Menu", {color: "#ff0000"}).setFontSize(50);
         m1.setInteractive();
         m1.on('pointerdown', () => {
             this.scene.stop('level1');
