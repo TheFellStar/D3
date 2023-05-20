@@ -66,6 +66,8 @@ class Level2 extends Phaser.Scene {
         this.physics.add.existing(this.ball);
 
         cursors = this.input.keyboard.createCursorKeys();
+        reset = this.input.keyboard.addKey('R');
+        reset.on('down', () => this.scene.start('level2'));
     }
     update(){
         this.physics.add.collider(this.ball, this.walls);

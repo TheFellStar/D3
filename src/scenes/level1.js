@@ -9,6 +9,7 @@ class Level1 extends Phaser.Scene {
     create(){
         this.P1_VEL = 300;
 
+        this.add.text(150, 150, "Press R to reset", {color: "#000000"}).setFontSize(50);
 
         this.walls = this.physics.add.group({
 			immovable: true
@@ -65,6 +66,8 @@ class Level1 extends Phaser.Scene {
         this.physics.add.existing(this.ball);
 
         cursors = this.input.keyboard.createCursorKeys();
+        reset = this.input.keyboard.addKey('R');
+        reset.on('down', () => this.scene.start('level1'));
     }
     update(){
         this.physics.add.collider(this.ball, this.walls);

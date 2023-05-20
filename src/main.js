@@ -20,7 +20,5 @@ let config = {
 let game = new Phaser.Game(config);
 
 let centerX = game.config.width/2;
-let widthSpacer = game.config.width/5;
-let halfHeight = game.config.height/2;
-let swap = null;
+let reset = null;
 let cursors = null;
