@@ -9,6 +9,7 @@ class Level2 extends Phaser.Scene {
     create(){
         this.P1_VEL = 300;
 
+        this.add.text(150, 150, "Press R keys to reset", {color: "#000000"}).setFontSize(50);
 
         this.walls = this.physics.add.group({
 			immovable: true
