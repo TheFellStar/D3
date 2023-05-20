@@ -93,7 +93,7 @@ class Level1 extends Phaser.Scene {
         }
 
         if(this.physics.overlap(this.ball, this.flag)){
-            this.scene.start('level2');
+            this.scene.start('win1');
         }
     }
 }

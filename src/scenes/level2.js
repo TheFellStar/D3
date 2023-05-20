@@ -95,7 +95,7 @@ class Level2 extends Phaser.Scene {
         }
 
         if(this.physics.overlap(this.ball, this.flag)){
-            this.scene.start('level3');
+            this.scene.start('win2');
         }
         if(this.physics.overlap(this.boxes, this.button)){
             this.blueWall.destroy();

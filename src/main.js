@@ -14,7 +14,7 @@ let config = {
         }
     },
     backgroundColor: '#ffffff',
-    scene: [ Menu, LevelSelect, Level1, Level2, Level3, PauseMenu1, PauseMenu2, PauseMenu3],
+    scene: [ Menu, LevelSelect, Win1, Win2, Win3, Level1, Level2, Level3, PauseMenu1, PauseMenu2, PauseMenu3],
 }
 
 let game = new Phaser.Game(config);

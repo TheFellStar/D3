@@ -3,7 +3,7 @@ class Menu extends Phaser.Scene {
         super('menu');
     }
     create() {
-        this.add.text(700, 240, " Sketch \nand Roll", {color: "#000000"}).setFontSize(100);
+        this.add.text(765, 325, "Shapes", {color: "#000000"}).setFontSize(100);
         let start = this.add.text(800, 450, "Start Game", {color: "#000000"}).setFontSize(50);
         start.setInteractive();
         start.on('pointerdown', () => this.scene.start('level1'));
